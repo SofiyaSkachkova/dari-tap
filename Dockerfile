@@ -23,25 +23,23 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Создание рабочей директории
 WORKDIR /var/www
 
-# ✅ Сначала копируем весь проект
+# Копируем весь проект
 COPY . .
 
-# ✅ Потом устанавливаем зависимости
+# Установка зависимостей Laravel
 RUN composer install --no-dev --optimize-autoloader
-
-# Копирование конфига nginx
-COPY nginx.conf /etc/nginx/nginx.conf
 
 # Настройка прав
 RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage
+    && chmod -R 775 storage bootstrap/cache
 
-# Копирование конфигурации Supervisor
+# Копирование nginx и supervisor конфигов
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisord.conf
 
-# Запуск Supervisor
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+# Добавим стартовый скрипт
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Права доступа для Laravel
-RUN chmod -R 775 storage bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache
+# Запуск через entrypoint
+CMD ["/usr/local/bin/docker-entrypoint.sh"]
