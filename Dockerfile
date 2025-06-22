@@ -20,17 +20,17 @@ RUN apt-get update && apt-get install -y \
 # Установка Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Установка расширений PHP
-RUN docker-php-ext-install pdo mbstring exif pcntl bcmath gd
-
-# Установка зависимостей Laravel
-COPY composer.lock composer.json /var/www/
+# Создание рабочей директории
 WORKDIR /var/www
+
+# Копируем только composer.json и composer.lock
+COPY composer.json composer.lock ./
+
+# Установка зависимостей
 RUN composer install --no-dev --optimize-autoloader
 
-# Копирование проекта
-WORKDIR /var/www
-COPY . /var/www
+# Теперь копируем весь проект
+COPY . .
 
 # Копирование конфига nginx
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -39,7 +39,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage
 
-# Запуск Supervisor, чтобы одновременно запустить php-fpm и nginx
+# Копирование конфигурации Supervisor
 COPY supervisord.conf /etc/supervisord.conf
 
+# Запуск Supervisor
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
