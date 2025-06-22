@@ -23,14 +23,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Создание рабочей директории
 WORKDIR /var/www
 
-# Копируем только composer.json и composer.lock
-COPY composer.json composer.lock ./
-
-# Установка зависимостей
-RUN composer install --no-dev --optimize-autoloader
-
-# Теперь копируем весь проект
+# ✅ Сначала копируем весь проект
 COPY . .
+
+# ✅ Потом устанавливаем зависимости
+RUN composer install --no-dev --optimize-autoloader
 
 # Копирование конфига nginx
 COPY nginx.conf /etc/nginx/nginx.conf
