@@ -41,3 +41,7 @@ COPY supervisord.conf /etc/supervisord.conf
 
 # Запуск Supervisor
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+
+# Права доступа для Laravel
+RUN chmod -R 775 storage bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache
