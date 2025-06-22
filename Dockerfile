@@ -23,6 +23,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Установка расширений PHP
 RUN docker-php-ext-install pdo mbstring exif pcntl bcmath gd
 
+# Установка зависимостей Laravel
+COPY composer.lock composer.json /var/www/
+WORKDIR /var/www
+RUN composer install --no-dev --optimize-autoloader
+
 # Копирование проекта
 WORKDIR /var/www
 COPY . /var/www
