@@ -1,0 +1,314 @@
+html {
+  height: 100%;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+.header {
+    width: 100%;
+    height: 8%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+
+.stroka-foto {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+.stroka {
+    display: flex;
+    align-items: center;
+    background-color: rgb(87, 164, 255);
+    padding: 7px 10px;
+    border-radius: 25px;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+}
+
+.stroka p {
+    margin: 0;
+    color: white;
+    font-size: 16px;
+}
+
+.bt1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.bt1 img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.section {
+    flex: 1;
+    padding: 20px;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.medicine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.medicine-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.medicine-card:hover {
+    transform: scale(1.03);
+}
+
+.medicine-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.medicine-card h3 {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.medicine-card p {
+    font-size: 14px;
+    color: #333;
+}
+
+.footer {
+    width: 100%;
+    min-height: 150px;
+    background-color: rgb(4, 82, 172);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+    position: relative;
+}
+
+.block2 {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.block2 h1 {
+    font-size: 50px;
+    margin: 0;
+}
+
+.block2 h4 {
+    font-size: 14px;
+    margin: 0;
+}
+
+.block3 {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    display: flex;
+    gap: 30px;
+    text-align: left;
+}
+
+.block3 h2 {
+    font-size: 35px;
+    margin: 10px;
+}
+
+.block3 p {
+    font-size: 15px;
+    margin: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+}
+
+.tooltip {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s;
+    max-width: 200px;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .poisk-lang {
+        width: 100%;
+        flex-direction: row;
+        gap: 15px;
+        order: 2;
+    }
+
+    .stroka-poiska {
+        width: 100%;
+        max-width: none;
+    }
+
+    .medicine-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .medicine-card {
+        padding: 10px;
+    }
+
+    .medicine-card img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .medicine-card h3 {
+        font-size: 14px;
+    }
+
+    .medicine-card p {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .stroka-poiska input[type="text"] {
+        font-size: 14px;
+    }
+
+    .medicine-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .medicine-card {
+        padding: 10px;
+    }
+
+    .medicine-card img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .medicine-card h3 {
+        font-size: 13px;
+    }
+
+    .medicine-card p {
+        font-size: 12px;
+    }
+}
+
+
+.dark-mode {
+    background-color: #222;
+    color: white;
+}
+
+.dark-mode .header {
+    background-color: #000;
+}
+
+.dark-mode .stroka {
+    background-color: #444;
+}
+
+.dark-mode .stroka p {
+    color: white;
+}
+
+.dark-mode .section {
+    background-color: #333;
+}
+
+.dark-mode .medicine-card {
+    background-color: #1e1e1e;
+    border: 1px solid #444;
+}
+
+.dark-mode .medicine-card h3,
+.dark-mode .medicine-card p {
+    color: white;
+}
+
+.dark-mode .footer {
+    background-color: #111;
+    color: white;
+}
+
+.dark-mode .footer h1,
+.dark-mode .footer h2,
+.dark-mode .footer h4,
+.dark-mode .footer p {
+    color: white;
+}
