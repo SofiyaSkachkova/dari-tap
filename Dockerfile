@@ -43,3 +43,10 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Запуск через entrypoint
 CMD ["/usr/local/bin/docker-entrypoint.sh"]
+
+# Устанавливаем Node.js (добавь это в Dockerfile после apt-get install -y)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
+
+# Устанавливаем frontend зависимости
+RUN npm install && npm run build
